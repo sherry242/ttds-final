@@ -13,8 +13,14 @@
     <form action="http://127.0.0.1:5000/search" method="post">
         <h1>FIND MUSIC</h1>
         <div class="form-box">
-            <input type="text" class="search-input" name="search">
-            <button class="search-btn" type="submit">Search</button>
+            <input type="text" class="search-input" name="keyword" id="query" required placeholder="lyrics, title, album, artist">
+            <button class="search-btn" type="submit" onclick="jump()">Search</button>
+            <script type="text/javascript">
+                function jump() {
+                    let query = document.getElementById('query');
+                    location.href='music.html';
+                }
+            </script>
         </div>
     </form>
 </div>
