@@ -57,10 +57,9 @@
 		<table class="Modbus">
 			<thead>
 			<tr>
+				<th>Artists</th>
 				<th>Albums</th>
-                <th>Artists</th>
 				<th>Date</th>
-
 			</tr>
 			</thead>
         {% for item in data %}
@@ -70,15 +69,15 @@
             </style>
             <tr>
 
-                <td><a href={{ item['address3'] }}>{{ item['Albums'].replace(kwd,'<mark>'+kwd+'</mark>') |safe }}</a></td>
                 <td><a href={{ item['address2'] }}>{{ item['Artists'].replace(kwd,'<mark>'+kwd+'</mark>') |safe }}</a></td>
-
+                <td><a href={{ item['address3'] }}>{{ item['Albums'].replace(kwd,'<mark>'+kwd+'</mark>') |safe }}</a></td>
               <td>{{ item['date'].replace(kwd,'<mark>'+kwd+'</mark>') |safe }}</td>
             </tr>
             {% endfor %}
 		</table>
 
      <p>{{ data_num }} results&nbsp({{ time }}）&nbsp;</p>
+
 </div>
 
 <div>{{ pagination.links }}</div>
