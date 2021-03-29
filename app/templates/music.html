@@ -11,11 +11,18 @@
 <body>
 
 <div class="header">
+{#    <form action="http://35.222.58.19:5000/search" method="post">#}
     <form action="http://127.0.0.1:5000/search" method="post">
         <div class="form-box">
             <label class="search-label">FIND MUSIC</label>
-            <input type="text" class="search-input" name="search" id="search">
-            <button class="search-btn" type="submit">Search</button>
+            <input type="text" class="search-input" name="keyword" id="query" required placeholder= {{ kwd }}>
+            <button class="search-btn" type="submit" onclick="jump()">Search</button>
+            <script type="text/javascript">
+                function jump() {
+                    let query = document.getElementById('query');
+                    location.href='music.html';
+                }
+            </script>
         </div>
 
 
@@ -59,69 +66,30 @@
 			</tr>
 			</thead>
         {% for item in data %}
-             <style>
+                       <style>
                mark {
-                  background-color:#FFFF00; font-weight:bold; }
+                  color:#6aa6ed;  }
             </style>
             <tr>
-              <td>{{ item['Songs'].replace(kwd,'<mark>'+kwd+'</mark>') |safe }}</td>
-{#              <td>{{ item['Artists'].replace(kwd,'<font color=\"red\">''<strong>'+kwd+'</strong>''</font>') |safe }}</td>#}
-              <td>{{ item['Artists'].replace(kwd,'<mark>'+kwd+'</mark>') |safe }}</td>
-              <td>{{ item['Albums'].replace(kwd,'<mark>'+kwd+'</mark>') |safe }}</td>
+              <td><a href={{ item['address'] }}>{{ item['Songs'].replace(kwd,'<mark>'+kwd+'</mark>') |safe }}</a></td>
+                <td><a href={{ item['address2'] }}>{{ item['Artists'].replace(kwd,'<mark>'+kwd+'</mark>') |safe }}</a></td>
+                <td><a href={{ item['address3'] }}>{{ item['Albums'].replace(kwd,'<mark>'+kwd+'</mark>') |safe }}</a></td>
               <td>{{ item['date'].replace(kwd,'<mark>'+kwd+'</mark>') |safe }}</td>
             </tr>
             {% endfor %}
 		</table>
 
      <p>{{ data_num }} results&nbsp({{ time }}）&nbsp;</p>
-{#<nobr> </nobr>#}
+
 </div>
-
-
-
 
 
  <div>{{ pagination.links }}</div>
 
 
 
+</div>
 
-
-
-{#<script type="text/javascript">#}
-{#		// 1.根据输入框内容，搜索表格，被检索项高亮显示(黄色)。#}
-{#		var txtId=document.getElementById('txt-id');//输入框#}
-{#		var txtName=document.getElementById('txt-name');#}
-{#		var tbody=document.getElementsByTagName('tbody')[0];//tbody对象#}
-{#		// console.log(tbody);#}
-{#		var trs=tbody.getElementsByTagName('tr');//tbody下的所有行 HTMLCollection#}
-{#		// console.log(trs);#}
-{#		//"搜索"点击事件#}
-{#		document.getElementById('btn-search').onclick=function () {#}
-{#				trimBg();#}
-{#				//遍历内容行#}
-{#				for(var i=0;i<trs.length;i++){#}
-{#					var id=trs[i].children[0].innerHTML;//获取每一行的id 的内容#}
-{#					var uName=trs[i].children[1].innerHTML;//获取每一行的姓名#}
-{#					//获取输入框内容#}
-{#					var userId=txtId.value.trim();//祛除空格后的数据#}
-{#					var userName=txtName.value.trim();//祛除空格#}
-{#					if((userId!=''&&userName==''&&id==userId)||#}
-{#						(userId==''&&userName!=''&&uName==userName)||#}
-{#						(userId!=''&&userName!=''&&id==userId&&uName==userName)){#}
-{#						trs[i].style.background='yellow';#}
-{#					}#}
-{##}
-{#				}#}
-{#			};#}
-{#			//祛除行背景#}
-{#			function trimBg(){#}
-{#				for(var i=0;i<trs.length;i++){#}
-{#					trs[i].style.background='white';#}
-{#				}#}
-{#			}#}
-{##}
-{#	</script>#}
 
 </body>
 </html>
